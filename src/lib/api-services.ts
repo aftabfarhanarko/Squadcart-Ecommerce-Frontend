@@ -182,34 +182,6 @@ export async function getProducts(
     } catch (error: unknown) {
         console.error("Error fetching products:", error);
         return MOCK_PRODUCTS;
-        const err = error as {
-            code?: string;
-            message?: string;
-            cause?: { code?: string } | AggregateError;
-            name?: string;
-            errors?: unknown[];
-        };
-        // Handle various connection errors including AggregateError
-        const isConnectionError =
-            err.code === 'ECONNREFUSED' ||
-            err.code === 'ETIMEDOUT' ||
-            err.code === 'ENOTFOUND' ||
-            err.message?.includes('ECONNREFUSED') ||
-            err.message?.includes('ETIMEDOUT') ||
-            err.message?.includes('ENOTFOUND') ||
-            err.message?.includes('Network Error') ||
-            err.message?.includes('fetch failed') ||
-            err.message?.includes('AggregateError') ||
-            (err.cause && (err.cause as { code?: string }).code === 'ECONNREFUSED') ||
-            err.name === 'AggregateError' ||
-            (err.name === 'AggregateError' && err.errors && Array.isArray(err.errors));
-
-        if (isConnectionError) {
-            console.warn("Backend server is not running or not accessible. Please start the backend server.");
-            return [];
-        }
-        // For other errors, still return empty array to prevent app crash
-        return [];
     }
 }
 
@@ -287,33 +259,6 @@ export async function getProductsByCategory(
         return [];
     } catch (error: unknown) {
         console.error("Error fetching products by category:", error);
-        const err = error as {
-            code?: string;
-            message?: string;
-            cause?: { code?: string } | AggregateError;
-            name?: string;
-            errors?: unknown[];
-        };
-        // Handle various connection errors including AggregateError
-        const isConnectionError =
-            err.code === 'ECONNREFUSED' ||
-            err.code === 'ETIMEDOUT' ||
-            err.code === 'ENOTFOUND' ||
-            err.message?.includes('ECONNREFUSED') ||
-            err.message?.includes('ETIMEDOUT') ||
-            err.message?.includes('ENOTFOUND') ||
-            err.message?.includes('Network Error') ||
-            err.message?.includes('fetch failed') ||
-            err.message?.includes('AggregateError') ||
-            (err.cause && (err.cause as { code?: string }).code === 'ECONNREFUSED') ||
-            err.name === 'AggregateError' ||
-            (err.name === 'AggregateError' && err.errors && Array.isArray(err.errors));
-
-        if (isConnectionError) {
-            console.warn("Backend server is not running or not accessible. Please start the backend server.");
-            return [];
-        }
-        // For other errors, still return empty array to prevent app crash
         return [];
     }
 }
@@ -376,34 +321,6 @@ export async function getTrendingProducts(
     } catch (error: unknown) {
         console.error("Error fetching trending products:", error);
         return MOCK_PRODUCTS;
-        const err = error as {
-            code?: string;
-            message?: string;
-            cause?: { code?: string } | AggregateError;
-            name?: string;
-            errors?: unknown[];
-        };
-        // Handle various connection errors including AggregateError
-        const isConnectionError =
-            err.code === 'ECONNREFUSED' ||
-            err.code === 'ETIMEDOUT' ||
-            err.code === 'ENOTFOUND' ||
-            err.message?.includes('ECONNREFUSED') ||
-            err.message?.includes('ETIMEDOUT') ||
-            err.message?.includes('ENOTFOUND') ||
-            err.message?.includes('Network Error') ||
-            err.message?.includes('fetch failed') ||
-            err.message?.includes('AggregateError') ||
-            (err.cause && (err.cause as { code?: string }).code === 'ECONNREFUSED') ||
-            err.name === 'AggregateError' ||
-            (err.name === 'AggregateError' && err.errors && Array.isArray(err.errors));
-
-        if (isConnectionError) {
-            console.warn("Backend server is not running or not accessible. Please start the backend server.");
-            return [];
-        }
-        // For other errors, still return empty array to prevent app crash
-        return [];
     }
 }
 
@@ -423,34 +340,6 @@ export async function getFlashSaleProducts(companyId?: string): Promise<Product[
     } catch (error: unknown) {
         console.error("Error fetching flash sale products:", error);
         return MOCK_PRODUCTS.filter(p => p.isFlashSell);
-        const err = error as {
-            code?: string;
-            message?: string;
-            cause?: { code?: string } | AggregateError;
-            name?: string;
-            errors?: unknown[];
-        };
-        // Handle various connection errors including AggregateError
-        const isConnectionError =
-            err.code === 'ECONNREFUSED' ||
-            err.code === 'ETIMEDOUT' ||
-            err.code === 'ENOTFOUND' ||
-            err.message?.includes('ECONNREFUSED') ||
-            err.message?.includes('ETIMEDOUT') ||
-            err.message?.includes('ENOTFOUND') ||
-            err.message?.includes('Network Error') ||
-            err.message?.includes('fetch failed') ||
-            err.message?.includes('AggregateError') ||
-            (err.cause && (err.cause as { code?: string }).code === 'ECONNREFUSED') ||
-            err.name === 'AggregateError' ||
-            (err.name === 'AggregateError' && err.errors && Array.isArray(err.errors));
-
-        if (isConnectionError) {
-            console.warn("Backend server is not running or not accessible. Please start the backend server.");
-            return [];
-        }
-        // For other errors, still return empty array to prevent app crash
-        return [];
     }
 }
 
@@ -472,34 +361,6 @@ export async function getCategories(companyId?: string): Promise<Category[]> {
     } catch (error: unknown) {
         console.error("Error fetching categories:", error);
         return MOCK_CATEGORIES;
-        const err = error as {
-            code?: string;
-            message?: string;
-            cause?: { code?: string } | AggregateError;
-            name?: string;
-            errors?: unknown[];
-        };
-        // Handle various connection errors including AggregateError
-        const isConnectionError =
-            err.code === 'ECONNREFUSED' ||
-            err.code === 'ETIMEDOUT' ||
-            err.code === 'ENOTFOUND' ||
-            err.message?.includes('ECONNREFUSED') ||
-            err.message?.includes('ETIMEDOUT') ||
-            err.message?.includes('ENOTFOUND') ||
-            err.message?.includes('Network Error') ||
-            err.message?.includes('fetch failed') ||
-            err.message?.includes('AggregateError') ||
-            (err.cause && (err.cause as { code?: string }).code === 'ECONNREFUSED') ||
-            err.name === 'AggregateError' ||
-            (err.name === 'AggregateError' && err.errors && Array.isArray(err.errors));
-
-        if (isConnectionError) {
-            console.warn("Backend server is not running or not accessible. Please start the backend server.");
-            return [];
-        }
-        // For other errors, still return empty array to prevent app crash
-        return [];
     }
 }
 
@@ -688,34 +549,6 @@ export async function getBanners(companyId?: string): Promise<Banner[]> {
     } catch (error: unknown) {
         console.error("Error fetching banners:", error);
         return MOCK_BANNERS;
-        const err = error as {
-            code?: string;
-            message?: string;
-            cause?: { code?: string } | AggregateError;
-            name?: string;
-            errors?: unknown[];
-        };
-        // Handle various connection errors including AggregateError
-        const isConnectionError =
-            err.code === 'ECONNREFUSED' ||
-            err.code === 'ETIMEDOUT' ||
-            err.code === 'ENOTFOUND' ||
-            err.message?.includes('ECONNREFUSED') ||
-            err.message?.includes('ETIMEDOUT') ||
-            err.message?.includes('ENOTFOUND') ||
-            err.message?.includes('Network Error') ||
-            err.message?.includes('fetch failed') ||
-            err.message?.includes('AggregateError') ||
-            (err.cause && (err.cause as { code?: string }).code === 'ECONNREFUSED') ||
-            err.name === 'AggregateError' ||
-            (err.name === 'AggregateError' && err.errors && Array.isArray(err.errors));
-
-        if (isConnectionError) {
-            console.warn("Backend server is not running or not accessible. Please start the backend server.");
-            return [];
-        }
-        // For other errors, still return empty array to prevent app crash
-        return [];
     }
 }
 
