@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    --primary: 0, 0%, 0%;
+    --secondary: 0, 84%, 60%;
+  }
+}
+
+/* GLOBAL BUTTON STYLES */
+.btn-submit,
+button[type="submit"],
+.submit-btn {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  transition: 300ms;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+}
+.btn-submit:hover,
+button[type="submit"]:hover,
+.submit-btn:hover {
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.btn-cancel,
+.cancel-btn {
+  background-color: #dc2626;
+  color: #ffffff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  transition: 300ms;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+}
+.btn-cancel:hover,
+.cancel-btn:hover {
+  background-color: #b91c1c;
+}
+
+/* GLOBAL SCROLLBAR STYLES */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #1a1a1a;
+}

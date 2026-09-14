@@ -1,0 +1,5 @@
+[phases.build]
+cmds = ["npm run build --workspace=chitrokormo"]
+
+[start]
+cmd = "npm run start --workspace=chitrokormo"

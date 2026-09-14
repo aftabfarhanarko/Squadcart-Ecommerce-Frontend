@@ -1,0 +1,92 @@
+{
+    # Global options
+    email samsuddohasojib@gmail.com
+    
+    # FOR LOCAL DEVELOPMENT: uncomment the line below to use local self-signed certs.
+    # FOR PRODUCTION: keep this line commented so Caddy uses Let's Encrypt/ZeroSSL.
+    # local_certs
+
+    on_demand_tls {
+        ask http://api-app:8002/api/auth/check-domain
+    }
+}
+
+# ── 1. Super Admin API ────────────────────────────────────────────────
+api-console.squadcart.com, api-console.squadcart.app {
+    reverse_proxy api-console:8001
+}
+
+# ── 2. Merchant API ───────────────────────────────────────────────────
+api-app.squadcart.com, api-app.squadcart.app {
+    @admin_routes {
+        path /api/superadmin*
+    }
+    respond @admin_routes "Forbidden: superadmin routes not available on merchant API" 403
+
+    reverse_proxy api-app:8002
+}
+
+# ── 3. Super Admin Panel ──────────────────────────────────────────────
+console.squadcart.com, console.squadcart.app {
+    handle /api/* {
+        reverse_proxy api-console:8001
+    }
+    handle * {
+        reverse_proxy console:3001
+    }
+}
+
+# ── 4. Merchant Dashboard ─────────────────────────────────────────────
+app.squadcart.com, app.squadcart.app {
+    @admin_routes {
+        path /api/superadmin*
+    }
+    respond @admin_routes "Access denied from merchant portal" 403
+
+    handle /api/* {
+        reverse_proxy api-app:8002
+    }
+    handle * {
+        reverse_proxy app:3002
+    }
+}
+
+# ── 5. Public Landing Page ────────────────────────────────────────────
+squadcart.com, www.squadcart.com, squadcart.app, www.squadcart.app, localhost {
+    handle /api/landing-page/* {
+        reverse_proxy api-console:8001
+    }
+    handle /api/public/* {
+        reverse_proxy api-themes:8003
+    }
+    handle /api/checkout/* {
+        reverse_proxy api-themes:8003
+    }
+    handle /api/payments/* {
+        reverse_proxy api-themes:8003
+    }
+    handle /api/* {
+        reverse_proxy api-app:8002
+    }
+    handle /themes/* {
+        reverse_proxy themes:3003
+    }
+    handle * {
+        reverse_proxy landing:3000
+    }
+}
+
+# ── 6. On-Demand SSL for Merchant Custom Domains & Subdomains ────────
+# Handles *.squadcart.app, *.squadcart.com, and any custom domains
+:80, :443 {
+    tls {
+        on_demand
+    }
+
+    handle /api/* {
+        reverse_proxy api-themes:8003
+    }
+    handle * {
+        reverse_proxy themes:3003
+    }
+}

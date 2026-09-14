@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  squadcart-themes:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+      - NODE_ENV=development
+    restart: unless-stopped
+    # command: npm run dev
+    # volumes:
+    #   - ./src:/app/src
